@@ -1,0 +1,28 @@
+ #! /bin/bash
+
+old_suffix=$1
+new_suffix=$2
+
+    if (( $# > 2 || $# < 2 ))  #to check if there are  too few arguments
+    then echo "$0: You need provide two files." >&2
+    exit 1
+    fi
+     
+    for f in *.$old_suffix
+    do
+        new_name=${f%.*}.$new_suffix
+        
+    if [[ -e $new_name ]] # to check if the file already exists
+    then echo "$0: the file $new_name already exists" >&2
+    continue 
+    fi
+    
+    mv $f $new_name        
+    
+    if (( $? >0 ))   #to check if there's standard error
+    then echo "$0: You don't have access to the file $new_name " >&2
+    continue
+    fi
+    
+    
+done
