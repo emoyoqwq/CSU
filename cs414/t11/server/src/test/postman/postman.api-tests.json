@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "ff692328-2fe4-4686-b580-7ef10c5b2e9c",
+		"name": "414-api-tests",
+		"description": "This collection contains tests for the various API requests in the CS314 webapp.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "config",
+			"item": [
+				{
+					"name": "Config Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Server-side team name is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    const expectedTeamName = pm.collectionVariables.get(\"TEAM_NAME\");",
+									"    pm.expect(response.serverName).to.eql(expectedTeamName);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestType\": \"config\",\n    \"features\": [\"config\"] \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/config",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"config"
+							]
+						},
+						"description": "Testing the result of Config Post requests."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Platform",
+			"item": [
+				{
+					"name": "New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/user?user_info={{NEW_USER}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "user_info",
+									"value": "{{NEW_USER}}",
+									"description": "Required: This data is used to create a new user in the system and should be complete"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/user/?email=&password&session",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "",
+									"description": "Optional [string]: new email for the user"
+								},
+								{
+									"key": "password",
+									"value": null,
+									"description": "Optional [string]: this is the new hash representation of the users password"
+								},
+								{
+									"key": "session",
+									"value": null,
+									"description": "Required: This is the session security token that identifys the user making the request"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invitation",
+			"item": []
+		},
+		{
+			"name": "Match",
+			"item": [
+				{
+					"name": "Match",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Match static response is correct\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));\r",
+									"    pm.expect(response.match_board).to.eql(pm.collectionVariables.get(\"TEST_MATCH_INIT\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"match_id\": \"{{TEST_MATCH_ID}}\",\n\"user_id\": \"{{TEST_USER_ID}}\"}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Match static response is correct\", () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"user_id\": \"{{TEST_USER_ID}}\"}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Match static response is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"match_id\": \"{{TEST_MATCH_ID}}\",\n\"user_id\": \"{{TEST_USER_ID}}\",\n\"opponent_id\": \"dev2\",\n\"turn_id\": \"dev1\",\n\"active\": true,\n\"requestType\": \"match\",\n\"match_board\": \"{{TEST_MATCH_MOVE_1}}\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match - All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Match static response is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"match_id\": \"{{TEST_MATCH_ID}}\",\n\"user_id\": \"{{TEST_USER_ID}}\",\n\"opponent_id\": \"dev2\",\n\"turn_id\": \"dev1\",\n\"active\": true,\n\"requestType\": \"match\",\n\"match_board\": \"{{TEST_MATCH_MOVE_1}}\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match - Opponent ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Match static response is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"match_id\": \"{{TEST_MATCH_ID}}\",\n\"user_id\": \"{{TEST_USER_ID}}\",\n\"opponent_id\": \"dev2\",\n\"requestType\": \"match\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match - Turn ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Match static response is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"match_id\": \"{{TEST_MATCH_ID}}\",\n\"user_id\": \"{{TEST_USER_ID}}\",\n\"turn_id\": \"dev1\",\n\"requestType\": \"match\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match - Active Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Match static response is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"match_id\": \"{{TEST_MATCH_ID}}\",\n\"user_id\": \"{{TEST_USER_ID}}\",\n\"active\": true,\n\"requestType\": \"match\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match - Board Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Match static response is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.match_id).to.eql(pm.collectionVariables.get(\"TEST_MATCH_ID\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"match_id\": \"{{TEST_MATCH_ID}}\",\n\"user_id\": \"{{TEST_USER_ID}}\",\n\"match_board\": \"{{TEST_MATCH_MOVE_1}}\",\n\"requestType\": \"match\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/match/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "History",
+			"item": [
+				{
+					"name": "History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/match?match_id&filter&session",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match"
+							],
+							"query": [
+								{
+									"key": "match_id",
+									"value": null,
+									"description": "Optional: Use this option to request a specific match"
+								},
+								{
+									"key": "filter",
+									"value": null,
+									"description": "Optional: Use this option to request a group of matches\nGroups: abandoned"
+								},
+								{
+									"key": "session",
+									"value": null,
+									"description": "Required: This is the session security token that identifys the user making the request"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "History",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/match?match_data&session",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"match"
+							],
+							"query": [
+								{
+									"key": "match_data",
+									"value": null,
+									"description": "Required: Use this option to request a specific match"
+								},
+								{
+									"key": "session",
+									"value": null,
+									"description": "Required: This is the session security token that identifys the user making the request"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CURRENT_VERSION",
+			"value": "1"
+		},
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "TEAM_NAME",
+			"value": "t11 Team Samarium"
+		},
+		{
+			"key": "MATCH_STATIC_RESPONSE",
+			"value": "{\"match_id\":\"1\",\"match_turn\":\"test@test.com\",\"match_board\":\"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR\",\"requestType\":\"match\"}"
+		},
+		{
+			"key": "NEW_USER",
+			"value": "{\"nickname\": \"test\", \"password_hash\": \"test2\",\"email\": \"test@test.test\"}"
+		},
+		{
+			"key": "TEST_MATCH_ID",
+			"value": "0"
+		},
+		{
+			"key": "TEST_USER_ID",
+			"value": "dev1"
+		},
+		{
+			"key": "TEST_MATCH_INIT",
+			"value": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+		},
+		{
+			"key": "TEST_MATCH_MOVE_1",
+			"value": "rnbqkbnr/ppppppp1/7p/8/8/8/PPPPPPPP/RNBQKBNR"
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+  "$id": "https://example.com/address.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "match",
+  "description": "match object for POST request",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "description": "user_id should be a nickname",
+      "type": "string",
+      "pattern": "^.{3,30} ?"
+    }
+  },
+  "required":["user_id"],
+  "additionalProperties": true
+}
