@@ -1,0 +1,21 @@
+1. Because the functions are created to allocate memory and free the memory. It is meant to point to that memory, so we don't need any return type.
+
+2.Foo *q, Foo *r, delete q, delete r are called because they got memory successfully because of the ctor, so they need to free the memory. They are static becasue they only execute once which allocates memory and delete the memory when they are called.
+
+3. it doesn't compile because the operator new and delete are both private.
+
+4. it doesn't compile because it's already been deleted when it got allocated memory.
+
+5. because the ctor & dtor will be private in its son's class. I guess it doesn't allow other classes to freely allocate memory and delete memory.
+
+6. becasue when we use new, it allocates dymatic memory on heap and we use delete to free the memory. The momory on stack would be free automatically by the compiler and we don't need to delete r whose memory is on stack.
+
+7. 64 bits memory is better, but i'm not sure why because the computers nowadays are usually 64 bits.
+
+8. size of Foo is 8 and size of Bar is the same. q is greater than p, s is greater than r.
+
+9. Foo got redefined and Bar got redefined too. Bar inherited the redefined new and delete. sizeof(Bar) > sizeof(Foo) didn't work. I would change it to sizeof(Bar)=sizeof(Foo)
+
+10. normal.cc is faster because pool.cc needs to call function in header file.
+
+11. ratio of memory used in normal.cc is less than memory ued in pool.cc.

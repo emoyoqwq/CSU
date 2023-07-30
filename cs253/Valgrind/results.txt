@@ -1,0 +1,19 @@
+exp1: delete[] not called
+
+exp2: x[10] is out of bound, and delete[] also should be there. I just change x[10] to x[0] and add delete[]
+
+exp3: x was uninitialized
+
+exp4: y was uninitialized before calling foo()
+
+exp5: out of bound, char was initialized with 10 elements
+
+exp6: should call delete[] after using greet
+
+exp7: should use delete[]
+
+exp8: should use delete[] free should be used with malloc
+
+exp9: should be *a+=3 
+
+exp10: there is not +- with unsigned int, so it can't get correct output, but it can be calculated  
