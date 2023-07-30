@@ -1,0 +1,44 @@
+{
+  "$id": "https://example.com/address.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "matchHistory",
+  "description": "matchHistory response",
+  "type": "object",
+  "properties": {
+    "requestType": {
+      "type":"string",
+      "pattern":"^matchHistory$"
+    },
+    "matches": {
+      "type":"array",
+      "items": {
+        "type":"object",
+        "properties": {
+          "match_id": {
+            "type": "string"
+          },
+          "match_start": {
+            "type": "string"
+          },
+          "match_end": {
+            "type": "string"
+          },
+          "match_p1": {
+            "type": "string"
+          },
+          "match_p2": {
+            "type": "string"
+          },
+          "match_winner": {
+            "type": "string"
+          }
+        },
+        "required": ["match_id","match_start","match_end","match_p1","match_p2","match_winner"],
+        "additionalProperties": false
+      },
+      "minitems": 0
+    }
+  },
+  "required":["requestType","matches"],
+  "additionalProperties": false
+}

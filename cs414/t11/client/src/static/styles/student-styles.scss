@@ -1,0 +1,46 @@
+/* Add your own styles here. Use of this file should be minimized at all costs. However, if you feel the need to
+    declare your own CSS classes for a small padding fix or whatnot, this is the purpose of this file. You may be
+    tempted to go all out with the styling of your website. We encourage you not to spend the time styling the pages
+    for this class, and to spend that time on styling of your own personal webpage or side project.
+ */
+
+.login-header {
+  text-align: center;
+  margin-top: 220px;
+}
+
+.login-button {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.register-button {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.new-match-button {
+  margin-left: 20px;
+  text-align: left;
+}
+
+.unregister-button {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.logout-button {
+  margin-left: 47%;
+  position: fixed;
+  bottom: 9vh;
+  height: 4vh;
+}
+
+.refresh-button {
+  margin-left: 47%;
+}
+
+.page-header {
+  text-align: center;
+  margin-top: 10px;
+}

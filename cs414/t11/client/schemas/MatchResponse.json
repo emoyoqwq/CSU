@@ -1,0 +1,22 @@
+{
+  "$id": "https://example.com/address.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "match",
+  "description": "Match response for current match",
+  "type": "object",
+  "properties": {
+    "match_id": {
+      "description":"generated id number for the match",
+      "type":"string"
+    },
+    "user_id": {
+      "description": "user ID from client request",
+      "type": "string"
+    },
+    "requestType": {
+      "description": "request type",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
